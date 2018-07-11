@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mongooses</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/bulma.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+    </script>
+</head>
+
+<body>
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container">
+                <p class="title">Mongooses</p>
+            </div>
+        </div>
+    </section>
+    <section style="display:none;">
+        <%- addMongUrl = "/img/mongoose" + randImg.toString() + ".jpg"; %>
+            <%- addMongAction = "/mongeese/add/" + (newMong+1).toString(); %>
+            
+    </section>
+    <section class="section">
+        <div class="container">
+            <% for(mong in mongeese){ %>
+                <div style = "display:none;">
+                    <%- mongUrl = "/mongoose/" + mongeese[mong].mongooseId %>
+                </div>
+                <div class="card">
+                    <div class="card-image">
+                        <a href=<%= mongUrl %>>
+                            <figure class="image is-128x128">
+                                <img src=<%= mongeese[mong].url %> alt = "wrong">
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <p class="title is-6">Name:
+                                    <%= mongeese[mong].name %>
+                                </p>
+                                <p class="subtitle is-6">Age:
+                                    <%= mongeese[mong].age %>
+                                </p>
+                                <p class = "subtitle is-6">Id: 
+                                    <%= mongeese[mong].mongooseId %>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <p class="title is-6">Your New Mongoose</p>
+            <form method="post" action=<%= addMongAction %>>
+                <label for="name">Name: </label>
+                <input type="text" name="name">
+                <labell for="age">Age: </labell>
+                <input type="number" name="age">
+                <input type="hidden" value=<%= addMongUrl %> name = "url">
+                <input type = "hidden" value = <%= (newMong+1) %> name = "id">
+                <button class="button">Add a Mongoose</button>
+            </form>
+            <figure class="image is-128x128">
+                <img src=<%= addMongUrl %> alt = "no">
+            </figure>
+        </div>
+    </section>
+</body>
+
+</html>

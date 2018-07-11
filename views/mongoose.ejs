@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= mongoose.name %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/bulma.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+    </script>
+</head>
+
+<body>
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container">
+                <p class="title"><%= mongoose.name %></p>
+            </div>
+        </div>
+    </section>
+    <div style = "display:none">
+        <%- updMongUrl = "/img/mongoose" + randImg.toString() + ".jpg"; %>
+        <%- updMongAction = "/mongoose/" + mongoose.mongooseId.toString() + "/update"; %>
+        <%- delMongAction = "/mongoose/" + mongoose.mongooseId.toString() + "/delete"; %>
+    </div>
+    <section class="section">
+        <div class="container">
+            <div class="card">
+                <div class="card-image">
+                        <figure class="image is-128x128">
+                            <img src=<%= mongoose.url %> alt="wrong">
+                        </figure>
+                </div>
+                <div class="card-content">
+                    <p class="title is-6">Name: <%= mongoose.name %></p>
+                    <p class="subtitle is-6">Age: <%= mongoose.age %></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <form method="post" action=<%= updMongAction %>>
+                <label for="name">Name: </label>
+                <input type="text" name="name">
+                <label for="age">Age: </label>
+                <input type="number" name="age">
+                <input type="hidden" value=<%= updMongUrl %> name = "url">
+                <button class="button">Update this Mongoose</button>
+            </form>
+        </div>
+        <div class="container">
+            <a href=<%= delMongAction %>>Delete this Mongoose</a>
+            <a href = "/">Back to homepage</a>
+        </div>
+    </section>
+</body>
+
+</html>
